@@ -272,7 +272,8 @@ class Domoticz(object):
         endpoints = []
 
         # Devices
-        response = self.api('type=devices&used=true')
+        # response = self.api('type=devices&used=true')
+        response = self.api('type=command&param=getdevices&used=true')
         devices= response['result']
         for device in devices:
             endpoint = None
@@ -385,7 +386,8 @@ class Domoticz(object):
 
         # Scenes/Groups
         if self.includeScenesGroups:
-            response = self.api('type=scenes')
+            #response = self.api('type=scenes')
+            response = self.api('type=command&param=getscenes')
             scenes= response['result']
             for scene in scenes:
                 endpoint = None
@@ -426,7 +428,8 @@ class Domoticz(object):
     #  Domoticz API
     #
     def getDevice(self, idx):
-        return self.api('type=devices&rid=%s'%idx)['result'][0]
+        # return self.api('type=devices&rid=%s'%idx)['result'][0]
+        return self.api('type=command&param=getdevices&rid=%s'%idx)['result'][0]
 
     def setTemp(self, idx, value):
         # Ignore exception ???
